@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for carleski-streamlit-test on 2025-03-21T23:10:19-04:00
+# fly.toml app configuration file generated for streamlit-public on 2025-03-22T10:30:49-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'carleski-streamlit-test'
+app = 'streamlit-public'
 primary_region = 'ord'
 
 [build]
