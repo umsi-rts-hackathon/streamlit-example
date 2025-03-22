@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for hackathon-app on 2025-03-21T22:25:56-04:00
+# fly.toml app configuration file generated for carleski-streamlit-test on 2025-03-21T23:10:19-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'hackathon-app'
+app = 'carleski-streamlit-test'
 primary_region = 'ord'
 
 [build]
