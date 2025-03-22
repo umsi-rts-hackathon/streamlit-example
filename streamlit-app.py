@@ -1,12 +1,8 @@
-#######################
-# Import libraries
 import streamlit as st
 import pandas as pd
 import altair as alt
 import plotly.express as px
 
-#######################
-# Page configuration
 st.set_page_config(
     page_title="US Population Dashboard",
     page_icon="🏂",
@@ -16,13 +12,9 @@ st.set_page_config(
 alt.theme.enable("dark")
 
 
-#######################
-# Load data
 df_reshaped = pd.read_csv('data/us-population-2010-2019-reshaped.csv')
 
 
-#######################
-# Sidebar
 with st.sidebar:
     st.title('🏂 US Population Dashboard')
     
@@ -36,10 +28,6 @@ with st.sidebar:
     selected_color_theme = st.selectbox('Select a color theme', color_theme_list)
 
 
-#######################
-# Plots
-
-# Heatmap
 def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
     heatmap = alt.Chart(input_df).mark_rect().encode(
             y=alt.Y(f'{input_y}:O', axis=alt.Axis(title="Year", titleFontSize=18, titlePadding=15, titleFontWeight=900, labelAngle=0)),
@@ -54,10 +42,8 @@ def make_heatmap(input_df, input_y, input_x, input_color, input_color_theme):
         labelFontSize=12,
         titleFontSize=12
         ) 
-    # height=300
     return heatmap
 
-# Choropleth map
 def make_choropleth(input_df, input_id, input_column, input_color_theme):
     choropleth = px.choropleth(input_df, locations=input_id, color=input_column, locationmode="USA-states",
                                color_continuous_scale=input_color_theme,
@@ -75,7 +61,6 @@ def make_choropleth(input_df, input_id, input_column, input_color_theme):
     return choropleth
 
 
-# Donut chart
 def make_donut(input_response, input_text, input_color):
   if input_color == 'blue':
       chart_color = ['#29b5e8', '#155F7A']
@@ -118,7 +103,6 @@ def make_donut(input_response, input_text, input_color):
   ).properties(width=130, height=130)
   return plot_bg + plot + text
 
-# Convert population to text 
 def format_number(num):
     if num > 1000000:
         if not num % 1000000:
@@ -126,7 +110,6 @@ def format_number(num):
         return f'{round(num / 1000000, 1)} M'
     return f'{num // 1000} K'
 
-# Calculation year-over-year population migrations
 def calculate_population_difference(input_df, input_year):
   selected_year_data = input_df[input_df['year'] == input_year].reset_index()
   previous_year_data = input_df[input_df['year'] == input_year - 1].reset_index()
@@ -134,8 +117,6 @@ def calculate_population_difference(input_df, input_year):
   return pd.concat([selected_year_data.states, selected_year_data.id, selected_year_data.population, selected_year_data.population_difference], axis=1).sort_values(by="population_difference", ascending=False)
 
 
-#######################
-# Dashboard Main Panel
 col = st.columns((1.5, 4.5, 2), gap='medium')
 
 with col[0]:
